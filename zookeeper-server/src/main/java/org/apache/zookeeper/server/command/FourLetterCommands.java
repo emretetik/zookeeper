@@ -200,7 +200,7 @@ public class FourLetterCommands {
         if (commands != null) {
             String[] list = commands.split(",");
             for (String cmd : list) {
-                if (cmd.trim().equals("*")) {
+                if ("*".equals(cmd.trim())) {
                     for (Map.Entry<Integer, String> entry : cmd2String.entrySet()) {
                         whiteListedCommands.add(entry.getValue());
                     }
@@ -214,7 +214,7 @@ public class FourLetterCommands {
 
         // It is sad that isro and srvr are used by ZooKeeper itself. Need fix this
         // before deprecating 4lw.
-        if (System.getProperty("readonlymode.enabled", "false").equals("true")) {
+        if ("true".equals(System.getProperty("readonlymode.enabled", "false"))) {
             whiteListedCommands.add("isro");
         }
         // zkServer.sh depends on "srvr".

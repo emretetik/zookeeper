@@ -1642,7 +1642,7 @@ public class ZooKeeper implements AutoCloseable {
         // maintain semantics even in chroot case
         // specifically - root cannot be deleted
         // I think this makes sense even in chroot case.
-        if (clientPath.equals("/")) {
+        if ("/".equals(clientPath)) {
             // a bit of a hack, but delete(/) will never succeed and ensures
             // that the same semantics are maintained
             serverPath = clientPath;
@@ -1856,7 +1856,7 @@ public class ZooKeeper implements AutoCloseable {
         // maintain semantics even in chroot case
         // specifically - root cannot be deleted
         // I think this makes sense even in chroot case.
-        if (clientPath.equals("/")) {
+        if ("/".equals(clientPath)) {
             // a bit of a hack, but delete(/) will never succeed and ensures
             // that the same semantics are maintained
             serverPath = clientPath;

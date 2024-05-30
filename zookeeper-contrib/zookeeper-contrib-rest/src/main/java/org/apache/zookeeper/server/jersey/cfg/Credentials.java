@@ -36,7 +36,7 @@ public class Credentials extends HashMap<String, String> {
    public Credentials(String credentials) {
        super();
        
-       if (!credentials.trim().equals("")) {
+       if (!"".equals(credentials.trim())) {
            String[] parts = credentials.split(",");
            for(String p : parts) {
                String[] userPass = p.split(":");

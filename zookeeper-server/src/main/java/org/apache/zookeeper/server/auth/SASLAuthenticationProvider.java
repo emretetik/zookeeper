@@ -36,7 +36,7 @@ public class SASLAuthenticationProvider implements AuthenticationProvider {
     }
 
     public boolean matches(String id, String aclExpr) {
-        if ((id.equals("super") || id.equals(aclExpr))) {
+        if (("super".equals(id) || id.equals(aclExpr))) {
             return true;
         }
         String readAccessUser = System.getProperty("zookeeper.letAnySaslUserDoX");

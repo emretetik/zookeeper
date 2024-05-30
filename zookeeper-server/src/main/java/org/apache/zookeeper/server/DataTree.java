@@ -522,7 +522,7 @@ public class DataTree {
         }
         updateWriteStat(path, bytes);
         dataWatches.triggerWatch(path, Event.EventType.NodeCreated, zxid, acl);
-        childWatches.triggerWatch(parentName.equals("") ? "/" : parentName,
+        childWatches.triggerWatch("".equals(parentName) ? "/" : parentName,
             Event.EventType.NodeChildrenChanged, zxid, parentAcl);
     }
 

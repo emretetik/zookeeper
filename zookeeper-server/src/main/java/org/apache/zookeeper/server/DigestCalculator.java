@@ -77,7 +77,7 @@ public class DigestCalculator {
         // under "/", it will use "" as the path, but when set data or change
         // ACL on "/", it will use "/" as the path. Always mapping "/" to ""
         // to avoid mismatch.
-        if (path.equals("/")) {
+        if ("/".equals(path)) {
             path = "";
         }
 

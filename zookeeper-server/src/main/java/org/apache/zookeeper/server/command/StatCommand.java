@@ -61,7 +61,7 @@ public class StatCommand extends AbstractFourLetterCommand {
             pw.print(serverStats.toString());
             pw.print("Node count: ");
             pw.println(zkServer.getZKDatabase().getNodeCount());
-            if (serverStats.getServerState().equals("leader")) {
+            if ("leader".equals(serverStats.getServerState())) {
                 Leader leader = ((LeaderZooKeeperServer) zkServer).getLeader();
                 BufferStats proposalStats = leader.getProposalStats();
                 pw.printf("Proposal sizes last/min/max: %s%n", proposalStats.toString());

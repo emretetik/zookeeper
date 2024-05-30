@@ -100,7 +100,7 @@ public class QuorumMaj implements QuorumVerifier {
                 } else {
                     observingMembers.put(Long.valueOf(sid), qs);
                 }
-            } else if (key.equals("version")) {
+            } else if ("version".equals(key)) {
                 version = Long.parseLong(value, 16);
             }
         }

@@ -79,13 +79,13 @@ public class Version implements org.apache.zookeeper.version.Info {
         if (args.length > 1) {
             printUsage();
         }
-        if (args.length == 0 || (args.length == 1 && args[0].equals("--full"))) {
+        if (args.length == 0 || (args.length == 1 && "--full".equals(args[0]))) {
             System.out.println(getFullVersion());
             ServiceUtils.requestSystemExit(ExitCode.EXECUTION_FINISHED.getValue());
         }
-        if (args[0].equals("--short")) {
+        if ("--short".equals(args[0])) {
             System.out.println(getVersion());
-        } else if (args[0].equals("--revision")) {
+        } else if ("--revision".equals(args[0])) {
             System.out.println(getVersionRevision());
         } else {
             printUsage();

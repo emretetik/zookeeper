@@ -180,7 +180,7 @@ public class DigestAuthenticationProvider implements AuthenticationProvider {
         final String id = new String(authData);
         try {
             final String digest = generateDigest(id);
-            if (digest.equals(superDigest)) {
+            if (superDigest.equals(digest)) {
                 ids.add(new Id("super", ""));
             }
             ids.add(new Id(getScheme(), digest));

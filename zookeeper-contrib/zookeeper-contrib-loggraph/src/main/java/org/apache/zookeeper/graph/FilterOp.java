@@ -35,19 +35,19 @@ public abstract class FilterOp {
     }
 
     public static FilterOp newOp(String op) throws FilterException {
-	if (op.equals("or")) 
+	if ("or".equals(op)) 
 	    return new OrOp();
-	if (op.equals("and"))
+	if ("and".equals(op))
 	    return new AndOp();
-	if (op.equals("not"))
+	if ("not".equals(op))
 	    return new NotOp();
-	if (op.equals("xor"))
+	if ("xor".equals(op))
 	    return new XorOp();
-	if (op.equals("="))
+	if ("=".equals(op))
 	    return new EqualsOp();
-	if (op.equals("<"))
+	if ("<".equals(op))
 	    return new LessThanOp();
-	if (op.equals(">")) 
+	if (">".equals(op)) 
 	    return new GreaterThanOp();
 
 	throw new FilterException("Invalid operation '"+op+"'");

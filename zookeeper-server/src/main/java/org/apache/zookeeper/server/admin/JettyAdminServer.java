@@ -246,7 +246,7 @@ public class JettyAdminServer implements AdminServer {
             HttpServletResponse response) throws ServletException, IOException {
             // Capture the command name from the URL
             String cmd = request.getPathInfo();
-            if (cmd == null || cmd.equals("/")) {
+            if (cmd == null || "/".equals(cmd)) {
                 // No command specified, print links to all commands instead
                 for (String link : commandLinks()) {
                     response.getWriter().println(link);
@@ -311,7 +311,7 @@ public class JettyAdminServer implements AdminServer {
         private String extractCommandNameFromURL(final HttpServletRequest request,
                                                  final HttpServletResponse response) throws IOException {
             String cmd = request.getPathInfo();
-            if (cmd == null || cmd.equals("/")) {
+            if (cmd == null || "/".equals(cmd)) {
                 printCommandLinks(response);
                 return null;
             }

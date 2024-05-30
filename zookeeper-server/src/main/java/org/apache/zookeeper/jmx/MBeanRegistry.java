@@ -163,7 +163,7 @@ public class MBeanRegistry {
      * @return absolute path
      */
     public String makeFullPath(String prefix, String... name) {
-        StringBuilder sb = new StringBuilder(prefix == null ? "/" : (prefix.equals("/") ? prefix : prefix + "/"));
+        StringBuilder sb = new StringBuilder(prefix == null ? "/" : ("/".equals(prefix) ? prefix : prefix + "/"));
         boolean first = true;
         for (String s : name) {
             if (s == null) {

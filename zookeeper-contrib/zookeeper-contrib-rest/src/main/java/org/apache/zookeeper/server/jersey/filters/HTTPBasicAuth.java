@@ -64,7 +64,7 @@ public class HTTPBasicAuth implements Filter {
 
     private String[] parseAuthorization(String authorization) {
         String parts[] = authorization.split(" ");
-        if (parts.length == 2 && parts[0].equalsIgnoreCase("Basic")) {
+        if (parts.length == 2 && "Basic".equalsIgnoreCase(parts[0])) {
             String userPass = Base64.base64Decode(parts[1]);
 
             int p = userPass.indexOf(":");

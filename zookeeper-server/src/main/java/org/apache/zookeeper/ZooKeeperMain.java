@@ -170,15 +170,15 @@ public class ZooKeeperMain {
             while (it.hasNext()) {
                 String opt = it.next();
                 try {
-                    if (opt.equals("-server")) {
+                    if ("-server".equals(opt)) {
                         options.put("server", it.next());
-                    } else if (opt.equals("-timeout")) {
+                    } else if ("-timeout".equals(opt)) {
                         options.put("timeout", it.next());
-                    } else if (opt.equals("-r")) {
+                    } else if ("-r".equals(opt)) {
                         options.put("readonly", "true");
-                    } else if (opt.equals("-client-configuration")) {
+                    } else if ("-client-configuration".equals(opt)) {
                         options.put("client-configuration", it.next());
-                    } else if (opt.equals("-waitforconnection")) {
+                    } else if ("-waitforconnection".equals(opt)) {
                         options.put("waitforconnection", "true");
                     }
                 } catch (NoSuchElementException e) {
@@ -353,7 +353,7 @@ public class ZooKeeperMain {
     }
 
     public void executeLine(String line) throws InterruptedException, IOException {
-        if (!line.equals("")) {
+        if (!"".equals(line)) {
             cl.parseCommand(line);
             addToHistory(commandCount, line);
             processCmd(cl);
@@ -390,34 +390,34 @@ public class ZooKeeperMain {
 
         LOG.debug("Processing {}", cmd);
 
-        if (cmd.equals("quit")) {
+        if ("quit".equals(cmd)) {
             zk.close();
             ServiceUtils.requestSystemExit(exitCode);
-        } else if (cmd.equals("redo") && args.length >= 2) {
+        } else if ("redo".equals(cmd) && args.length >= 2) {
             Integer i = Integer.decode(args[1]);
             if (commandCount <= i || i < 0) { // don't allow redoing this redo
                 throw new MalformedCommandException("Command index out of range");
             }
             cl.parseCommand(history.get(i));
-            if (cl.getCommand().equals("redo")) {
+            if ("redo".equals(cl.getCommand())) {
                 throw new MalformedCommandException("No redoing redos");
             }
             history.put(commandCount, history.get(i));
             processCmd(cl);
-        } else if (cmd.equals("history")) {
+        } else if ("history".equals(cmd)) {
             for (int i = commandCount - 10; i <= commandCount; ++i) {
                 if (i < 0) {
                     continue;
                 }
                 System.out.println(i + " - " + history.get(i));
             }
-        } else if (cmd.equals("printwatches")) {
+        } else if ("printwatches".equals(cmd)) {
             if (args.length == 1) {
                 System.out.println("printwatches is " + (printWatches ? "on" : "off"));
             } else {
-                printWatches = args[1].equals("on");
+                printWatches = "on".equals(args[1]);
             }
-        } else if (cmd.equals("connect")) {
+        } else if ("connect".equals(cmd)) {
             if (args.length >= 2) {
                 connectToZK(args[1]);
             } else {

@@ -59,9 +59,9 @@ public class SnapshotFormatter {
 
         int i;
         for (i = 0; i < args.length; i++) {
-            if (args[i].equals("-d")) {
+            if ("-d".equals(args[i])) {
                 dumpData = true;
-            } else if (args[i].equals("-json")) {
+            } else if ("-json".equals(args[i])) {
                 dumpJson = true;
             } else {
                 snapshotFile = args[i];
@@ -147,7 +147,7 @@ public class SnapshotFormatter {
         }
         if (children != null) {
             for (String child : children) {
-                long cxid = printZnode(dataTree, name + (name.equals("/") ? "" : "/") + child, dumpData);
+                long cxid = printZnode(dataTree, name + ("/".equals(name) ? "" : "/") + child, dumpData);
                 zxid = Math.max(zxid, cxid);
             }
         }
@@ -197,7 +197,7 @@ public class SnapshotFormatter {
             return;
         }
 
-        final String name = fullPath.equals("/")
+        final String name = "/".equals(fullPath)
             ? fullPath
             : fullPath.substring(fullPath.lastIndexOf("/") + 1);
 
@@ -223,7 +223,7 @@ public class SnapshotFormatter {
         if (children != null && children.size() > 0) {
             System.out.print("[" + nodeSB);
             for (String child : children) {
-                printZnodeJson(dataTree, fullPath + (fullPath.equals("/") ? "" : "/") + child, encoder);
+                printZnodeJson(dataTree, fullPath + ("/".equals(fullPath) ? "" : "/") + child, encoder);
             }
             System.out.print("]");
         } else {

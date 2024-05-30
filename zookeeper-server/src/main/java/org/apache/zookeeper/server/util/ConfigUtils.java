@@ -41,7 +41,7 @@ public class ConfigUtils {
         for (Entry<Object, Object> entry : props.entrySet()) {
             String key = entry.getKey().toString().trim();
             String value = entry.getValue().toString().trim();
-            if (key.equals("version")) {
+            if ("version".equals(key)) {
                 version = value;
             }
             if (!key.startsWith("server.")) {

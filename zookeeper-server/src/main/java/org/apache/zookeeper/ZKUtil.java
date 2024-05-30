@@ -210,7 +210,7 @@ public class ZKUtil {
             List<String> children = zk.getChildren(node, false);
             for (final String child : children) {
                 // Fix IllegalArgumentException when list "/".
-                final String childPath = (node.equals("/") ? "" : node) + "/" + child;
+                final String childPath = ("/".equals(node) ? "" : node) + "/" + child;
                 queue.add(childPath);
                 tree.add(childPath);
             }

@@ -50,13 +50,13 @@ public class QuorumStats {
     public String toString() {
         StringBuilder sb = new StringBuilder(super.toString());
         String state = getServerState();
-        if (state.equals(Provider.LEADING_STATE)) {
+        if (Provider.LEADING_STATE.equals(state)) {
             sb.append("Followers:");
             for (String f : getQuorumPeers()) {
                 sb.append(" ").append(f);
             }
             sb.append("\n");
-        } else if (state.equals(Provider.FOLLOWING_STATE) || state.equals(Provider.OBSERVING_STATE)) {
+        } else if (Provider.FOLLOWING_STATE.equals(state) || Provider.OBSERVING_STATE.equals(state)) {
             sb.append("Leader: ");
             String[] ldr = getQuorumPeers();
             if (ldr.length > 0) {

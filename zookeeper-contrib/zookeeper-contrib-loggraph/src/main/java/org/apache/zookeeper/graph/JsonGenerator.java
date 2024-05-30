@@ -109,7 +109,7 @@ public class JsonGenerator {
 					JsonNode stateChange = add("stateChange", e.getTimestamp(), e.getNode(), m.group(1));
 					events.add(stateChange);
 
-					if (m.group(1).equals("LEADING")) {
+					if ("LEADING".equals(m.group(1))) {
 					leader = e.getNode();
 					}
 				}

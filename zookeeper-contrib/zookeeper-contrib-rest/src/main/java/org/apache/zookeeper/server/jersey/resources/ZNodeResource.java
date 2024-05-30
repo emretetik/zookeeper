@@ -70,10 +70,10 @@ public class ZNodeResource {
             throws IOException {
 
         String contextPath = request.getContextPath();
-        if (contextPath.equals("")) {
+        if ("".equals(contextPath)) {
             contextPath = "/";
         }
-        if (session.equals("")) {
+        if ("".equals(session)) {
             session = null;
         } else if (!ZooKeeperService.isConnected(contextPath, session)) {
             throw new WebApplicationException(Response.status(
@@ -146,7 +146,7 @@ public class ZNodeResource {
             throws InterruptedException, KeeperException {
         ensurePathNotNull(path);
 
-        if (view.equals("children")) {
+        if ("children".equals(view)) {
             List<String> children = new ArrayList<String>();
             for (String child : zk.getChildren(path, false)) {
                 children.add(child);
@@ -177,7 +177,7 @@ public class ZNodeResource {
             if (data == null) {
                 data64 = null;
                 dataUtf8 = null;
-            } else if (!dataformat.equals("utf8")) {
+            } else if (!"utf8".equals(dataformat)) {
                 data64 = data;
                 dataUtf8 = null;
             } else {
@@ -236,7 +236,7 @@ public class ZNodeResource {
                             + " bad version " + versionParam)).build());
         }
 
-        if (setNull.equals("true")) {
+        if ("true".equals(setNull)) {
             data = null;
         }
 
@@ -273,7 +273,7 @@ public class ZNodeResource {
                             + " bad version " + versionParam)).build());
         }
 
-        if (setNull.equals("true")) {
+        if ("true".equals(setNull)) {
             data = null;
         }
 
@@ -297,31 +297,31 @@ public class ZNodeResource {
             KeeperException {
         ensurePathNotNull(path);
 
-        if (path.equals("/")) {
+        if ("/".equals(path)) {
             path += name;
         } else {
             path += "/" + name;
         }
 
-        if (!op.equals("create")) {
+        if (!"create".equals(op)) {
             throw new WebApplicationException(Response.status(
                     Response.Status.BAD_REQUEST).entity(
                     new ZError(ui.getRequestUri().toString(), path
                             + " bad operaton " + op)).build());
         }
 
-        if (setNull.equals("true")) {
+        if ("true".equals(setNull)) {
             data = null;
         }
 
         CreateMode createMode;
-        if (sequence.equals("true")) {
-            if (ephemeral.equals("false")) {
+        if ("true".equals(sequence)) {
+            if ("false".equals(ephemeral)) {
                 createMode = CreateMode.PERSISTENT_SEQUENTIAL;
             } else {
                 createMode = CreateMode.EPHEMERAL_SEQUENTIAL;
             }
-        } else if (ephemeral.equals("false")) {
+        } else if ("false".equals(ephemeral)) {
             createMode = CreateMode.PERSISTENT;
         } else {
             createMode = CreateMode.EPHEMERAL;
@@ -348,25 +348,25 @@ public class ZNodeResource {
             KeeperException {
         ensurePathNotNull(path);
 
-        if (path.equals("/")) {
+        if ("/".equals(path)) {
             path += name;
         } else {
             path += "/" + name;
         }
 
-        if (!op.equals("create")) {
+        if (!"create".equals(op)) {
             throw new WebApplicationException(Response.status(
                     Response.Status.BAD_REQUEST).entity(
                     new ZError(ui.getRequestUri().toString(), path
                             + " bad operaton " + op)).build());
         }
 
-        if (setNull.equals("true")) {
+        if ("true".equals(setNull)) {
             data = null;
         }
 
         CreateMode createMode;
-        if (sequence.equals("true")) {
+        if ("true".equals(sequence)) {
             createMode = CreateMode.PERSISTENT_SEQUENTIAL;
         } else {
             createMode = CreateMode.PERSISTENT;

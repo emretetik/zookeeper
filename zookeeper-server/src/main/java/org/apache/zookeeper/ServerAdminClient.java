@@ -260,17 +260,17 @@ public class ServerAdminClient {
         String host = args[0];
         int port = Integer.parseInt(args[1]);
         String op = args[2];
-        if (op.equalsIgnoreCase("gettracemask")) {
+        if ("gettracemask".equalsIgnoreCase(op)) {
             getTraceMask(host, port);
-        } else if (op.equalsIgnoreCase("settracemask")) {
+        } else if ("settracemask".equalsIgnoreCase(op)) {
             setTraceMask(host, port, args[3]);
-        } else if (op.equalsIgnoreCase("ruok")) {
+        } else if ("ruok".equalsIgnoreCase(op)) {
             ruok(host, port);
-        } else if (op.equalsIgnoreCase("kill")) {
+        } else if ("kill".equalsIgnoreCase(op)) {
             kill(host, port);
-        } else if (op.equalsIgnoreCase("stat")) {
+        } else if ("stat".equalsIgnoreCase(op)) {
             stat(host, port);
-        } else if (op.equalsIgnoreCase("dump")) {
+        } else if ("dump".equalsIgnoreCase(op)) {
             dump(host, port);
         } else {
             System.out.println("Unrecognized op: " + op);

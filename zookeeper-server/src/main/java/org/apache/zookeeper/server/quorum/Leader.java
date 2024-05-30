@@ -80,7 +80,7 @@ public class Leader extends LearnerMaster {
 
     private static final Logger LOG = LoggerFactory.getLogger(Leader.class);
 
-    private static final boolean nodelay = System.getProperty("leader.nodelay", "true").equals("true");
+    private static final boolean nodelay = "true".equals(System.getProperty("leader.nodelay", "true"));
 
     static {
         LOG.info("TCP NoDelay set to: {}", nodelay);
@@ -758,7 +758,7 @@ public class Leader extends LearnerMaster {
                 zk.setZxid((zk.getZxid() & 0xffffffff00000000L) | zxid);
             }
 
-            if (!System.getProperty("zookeeper.leaderServes", "yes").equals("no")) {
+            if (!"no".equals(System.getProperty("zookeeper.leaderServes", "yes"))) {
                 self.setZooKeeperServer(zk);
             }
 

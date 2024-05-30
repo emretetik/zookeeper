@@ -117,7 +117,7 @@ public class Learner {
      */
     private static final int leaderConnectDelayDuringRetryMs = Integer.getInteger("zookeeper.leaderConnectDelayDuringRetryMs", 100);
 
-    private static final boolean nodelay = System.getProperty("follower.nodelay", "true").equals("true");
+    private static final boolean nodelay = "true".equals(System.getProperty("follower.nodelay", "true"));
 
     public static final String LEARNER_ASYNC_SENDING = "zookeeper.learner.asyncSending";
     private static boolean asyncSending =
@@ -583,7 +583,7 @@ public class Learner {
                     zk.getZKDatabase().initConfigInZKDatabase(self.getQuorumVerifier());
                 }
                 String signature = leaderIs.readString("signature");
-                if (!signature.equals("BenWasHere")) {
+                if (!"BenWasHere".equals(signature)) {
                     LOG.error("Missing signature. Got {}", signature);
                     throw new IOException("Missing signature");
                 }

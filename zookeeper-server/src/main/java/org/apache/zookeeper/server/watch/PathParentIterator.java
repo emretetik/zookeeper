@@ -88,7 +88,7 @@ public class PathParentIterator implements Iterator<String> {
 
         String localPath = path;
         ++level;
-        if (path.equals("/")) {
+        if ("/".equals(path)) {
             path = "";
         } else {
             path = path.substring(0, path.lastIndexOf('/'));

@@ -109,7 +109,7 @@ public class Login {
             // there will only be a single entry, so this for() loop will only be iterated through once.
             if (entry.getOptions().get("useTicketCache") != null) {
                 String val = (String) entry.getOptions().get("useTicketCache");
-                if (val.equals("true")) {
+                if ("true".equals(val)) {
                     isUsingTicketCache = true;
                 }
             }

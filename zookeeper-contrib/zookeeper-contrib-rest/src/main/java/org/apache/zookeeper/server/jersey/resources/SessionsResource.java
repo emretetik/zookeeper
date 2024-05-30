@@ -55,7 +55,7 @@ public class SessionsResource {
 
     public SessionsResource(@Context HttpServletRequest request) {
         contextPath = request.getContextPath();
-        if (contextPath.equals("")) {
+        if ("".equals(contextPath)) {
             contextPath = "/";
         }
     }
@@ -81,7 +81,7 @@ public class SessionsResource {
     public Response createSession(@QueryParam("op") String op,
             @DefaultValue("5") @QueryParam("expire") String expire,
             @Context UriInfo ui) {
-        if (!op.equals("create")) {
+        if (!"create".equals(op)) {
             throw new WebApplicationException(Response.status(
                     Response.Status.BAD_REQUEST).entity(
                     new ZError(ui.getRequestUri().toString(), "")).build());

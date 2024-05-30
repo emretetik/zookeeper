@@ -74,7 +74,7 @@ public class IconResource {
         iconUrl = getClass().getResource(iconPath);
         if(null != iconUrl) return iconUrl;
 
-        if(!name.equals(FALLBACK_ICON)) return find(FALLBACK_ICON);
+        if(!FALLBACK_ICON.equals(name)) return find(FALLBACK_ICON);
         return null;
     }
 

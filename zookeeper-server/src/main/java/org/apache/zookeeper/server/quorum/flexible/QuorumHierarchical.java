@@ -220,7 +220,7 @@ public class QuorumHierarchical implements QuorumVerifier {
                 int dot = key.indexOf('.');
                 long sid = Long.parseLong(key.substring(dot + 1));
                 serverWeight.put(sid, Long.parseLong(value));
-            } else if (key.equals("version")) {
+            } else if ("version".equals(key)) {
                 version = Long.parseLong(value, 16);
             }
         }

@@ -60,9 +60,9 @@ public class Throughput extends JsonServlet
 		}
 
 		String scalestr = request.getString("scale", "minutes");
-		if (scalestr.equals("seconds")) {
+		if ("seconds".equals(scalestr)) {
 			scale = MS_PER_SEC;
-		} else if (scalestr.equals("hours")) {
+		} else if ("hours".equals(scalestr)) {
 			scale = MS_PER_HOUR;
 		} else {
 			scale = MS_PER_MIN;

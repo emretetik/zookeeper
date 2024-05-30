@@ -100,7 +100,7 @@ import org.apache.zookeeper.server.persistence.SnapStream;
     StringBuilder childBuilder = new StringBuilder();
     for (String child : children) {
       long[] childResult =
-          printZnode(dataTree, name + (name.equals("/") ? "" : "/") + child, childBuilder,
+          printZnode(dataTree, name + ("/".equals(name) ? "" : "/") + child, childBuilder,
               level + 1, maxDepth);
       result[0] = result[0] + childResult[0];
       result[1] = result[1] + childResult[1];
