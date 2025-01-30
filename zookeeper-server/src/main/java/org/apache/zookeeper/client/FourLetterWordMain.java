@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.client;
 
+import io.github.pixee.security.BoundedLineReader;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -151,7 +152,7 @@ public class FourLetterWordMain {
             reader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 sb.append(line).append("\n");
             }
             return sb.toString();

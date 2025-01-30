@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.test;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.BufferedReader;
@@ -106,7 +107,7 @@ public class ServerCnxnTest extends ClientBase {
         StringBuilder sb = new StringBuilder();
         String line;
         try {
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 sb.append(line + "\n");
             }
         } catch (IOException ioe) {

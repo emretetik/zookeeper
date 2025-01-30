@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.server.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -117,7 +118,7 @@ public class OSMXBean {
 
             try {
                 String openFileDesCount;
-                if ((openFileDesCount = output.readLine()) != null) {
+                if ((openFileDesCount = BoundedLineReader.readLine(output, 5_000_000)) != null) {
                     return Long.parseLong(openFileDesCount);
                 }
             } finally {
@@ -153,7 +154,7 @@ public class OSMXBean {
 
             try {
                 String maxFileDesCount;
-                if ((maxFileDesCount = output.readLine()) != null) {
+                if ((maxFileDesCount = BoundedLineReader.readLine(output, 5_000_000)) != null) {
                     return Long.parseLong(maxFileDesCount);
                 }
             } finally {

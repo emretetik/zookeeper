@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.server.quorum;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.apache.zookeeper.common.NetUtils.formatInetAddr;
 import static org.apache.zookeeper.server.quorum.QuorumPeerConfig.configureSSLAuth;
 import java.io.BufferedReader;
@@ -2287,7 +2288,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line = "";
         try {
-            line = br.readLine();
+            line = BoundedLineReader.readLine(br, 5_000_000);
             return Long.parseLong(line);
         } catch (NumberFormatException e) {
             throw new IOException("Found " + line + " in " + file);
