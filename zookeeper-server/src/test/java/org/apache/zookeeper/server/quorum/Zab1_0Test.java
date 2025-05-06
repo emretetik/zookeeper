@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.server.quorum;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.apache.zookeeper.server.quorum.ZabUtils.MockLeader;
 import static org.apache.zookeeper.server.quorum.ZabUtils.createLeader;
 import static org.apache.zookeeper.server.quorum.ZabUtils.createMockLeader;
@@ -1177,7 +1178,7 @@ public class Zab1_0Test extends ZKTestCase {
     }
 
     private String readContentsOfFile(File f) throws IOException {
-        return new BufferedReader(new FileReader(f)).readLine();
+        return BoundedLineReader.readLine(new BufferedReader(new FileReader(f)), 5_000_000);
     }
 
     @Test

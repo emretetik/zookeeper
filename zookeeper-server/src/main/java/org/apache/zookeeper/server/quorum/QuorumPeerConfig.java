@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.server.quorum;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.apache.zookeeper.common.NetUtils.formatInetAddr;
 import java.io.BufferedReader;
 import java.io.File;
@@ -736,7 +737,7 @@ public class QuorumPeerConfig {
         BufferedReader br = new BufferedReader(new FileReader(myIdFile));
         String myIdString;
         try {
-            myIdString = br.readLine();
+            myIdString = BoundedLineReader.readLine(br, 5_000_000);
         } finally {
             br.close();
         }

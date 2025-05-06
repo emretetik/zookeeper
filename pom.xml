@@ -579,7 +579,7 @@
     <!-- parameters to pass to C client build -->
     <c-client-openssl>yes</c-client-openssl>
     <c-client-sasl>yes</c-client-sasl>
-
+    <versions.java-security-toolkit>1.2.1</versions.java-security-toolkit>
   </properties>
 
   <dependencyManagement>
@@ -767,6 +767,12 @@
         <groupId>org.burningwave</groupId>
         <artifactId>tools</artifactId>
         <version>${burningwave.mockdns.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.github.pixee</groupId>
+        <artifactId>java-security-toolkit</artifactId>
+        
+        <version>${versions.java-security-toolkit}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -958,7 +964,7 @@
               <exportAntProperties>true</exportAntProperties>
               <target>
                 <property environment="env" />
-                <exec executable="hostname" outputproperty="host.name" />
+                <exec executable="hostname" outputproperty="host.name"/>
               </target>
             </configuration>
           </execution>

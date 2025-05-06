@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.server.admin;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -302,7 +303,7 @@ public class JettyAdminServerTest extends ZKTestCase {
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             dis = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         }
-        String line = dis.readLine();
+        String line = BoundedLineReader.readLine(dis, 5_000_000);
         assertTrue(line.length() > 0);
     }
 

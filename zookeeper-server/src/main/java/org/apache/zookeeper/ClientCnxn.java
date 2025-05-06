@@ -19,6 +19,7 @@
 package org.apache.zookeeper;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -1294,7 +1295,7 @@ public class ClientCnxn {
                 sock.getOutputStream().flush();
                 sock.shutdownOutput();
                 br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-                result = br.readLine();
+                result = BoundedLineReader.readLine(br, 5_000_000);
             } catch (ConnectException e) {
                 // ignore, this just means server is not up
             } catch (IOException e) {
