@@ -17,6 +17,7 @@
  */
 package org.apache.zookeeper.inspector.manager;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -623,7 +624,7 @@ public class ZooInspectorManagerImpl implements ZooInspectorManager {
 
             String line = "";
             while (line != null) {
-                line = reader.readLine();
+                line = BoundedLineReader.readLine(reader, 5_000_000);
                 if(line != null) {
                     line = line.trim();
                     if (!line.isEmpty() && !line.startsWith("#")) {

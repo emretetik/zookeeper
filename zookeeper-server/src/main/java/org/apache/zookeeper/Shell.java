@@ -29,6 +29,7 @@
 
 package org.apache.zookeeper;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -206,11 +207,11 @@ public abstract class Shell {
             @Override
             public void run() {
                 try {
-                    String line = errReader.readLine();
+                    String line = BoundedLineReader.readLine(errReader, 5_000_000);
                     while ((line != null) && !isInterrupted()) {
                         errMsg.append(line);
                         errMsg.append(System.getProperty("line.separator"));
-                        line = errReader.readLine();
+                        line = BoundedLineReader.readLine(errReader, 5_000_000);
                     }
                 } catch (IOException ioe) {
                     LOG.warn("Error reading the error stream", ioe);
@@ -224,9 +225,9 @@ public abstract class Shell {
         try {
             parseExecResult(inReader); // parse the output
             // clear the input stream buffer
-            String line = inReader.readLine();
+            String line = BoundedLineReader.readLine(inReader, 5_000_000);
             while (line != null) {
-                line = inReader.readLine();
+                line = BoundedLineReader.readLine(inReader, 5_000_000);
             }
             // wait for the process to finish and check the exit code
             exitCode = process.waitFor();
