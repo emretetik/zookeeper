@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.test;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.apache.zookeeper.client.FourLetterWordMain.send4LetterWord;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -137,33 +138,33 @@ public class FourLetterWordsTest extends ClientBase {
 
         String line;
         // first line should be version info
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         assertTrue(Pattern.matches("^.*\\s\\d+\\.\\d+\\.\\d+-.*$", line));
-        assertTrue(Pattern.matches("^Clients:$", in.readLine()));
+        assertTrue(Pattern.matches("^Clients:$", BoundedLineReader.readLine(in, 5_000_000)));
 
         int count = 0;
-        while ((line = in.readLine()).length() > 0) {
+        while ((line = BoundedLineReader.readLine(in, 5_000_000)).length() > 0) {
             count++;
             assertTrue(Pattern.matches("^ /.*:\\d+\\[\\d+\\]\\(queued=\\d+,recved=\\d+,sent=\\d+\\)$", line));
         }
         // ensure at least the two clients we created are accounted for
         assertTrue(count >= 2);
 
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         assertTrue(Pattern.matches("^Latency min/avg/max: \\d+/-?[0-9]*.?[0-9]*/\\d+$", line));
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         assertTrue(Pattern.matches("^Received: \\d+$", line));
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         assertTrue(Pattern.matches("^Sent: \\d+$", line));
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         assertTrue(Pattern.matches("^Connections: \\d+$", line));
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         assertTrue(Pattern.matches("^Outstanding: \\d+$", line));
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         assertTrue(Pattern.matches("^Zxid: 0x[\\da-fA-F]+$", line));
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         assertTrue(Pattern.matches("^Mode: .*$", line));
-        line = in.readLine();
+        line = BoundedLineReader.readLine(in, 5_000_000);
         assertTrue(Pattern.matches("^Node count: \\d+$", line));
 
         zk1.close();
@@ -181,7 +182,7 @@ public class FourLetterWordsTest extends ClientBase {
 
         String line;
         int count = 0;
-        while ((line = in.readLine()) != null && line.length() > 0) {
+        while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null && line.length() > 0) {
             count++;
             assertTrue(Pattern.matches("^ /.*:\\d+\\[\\d+\\]\\(queued=\\d+,recved=\\d+,sent=\\d+.*\\)$", line), line);
         }

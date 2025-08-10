@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.server.admin;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.apache.zookeeper.server.ZooKeeperServer.ZOOKEEPER_SERIALIZE_LAST_PROCESSED_ZXID_ENABLED;
 import static org.apache.zookeeper.server.admin.CommandAuthTest.addAuthInfoForDigest;
 import static org.apache.zookeeper.server.admin.CommandAuthTest.resetRootACL;
@@ -384,7 +385,7 @@ public class SnapshotAndRestoreCommandTest extends ZKTestCase {
         final StringBuilder sb = new StringBuilder();
         try (final BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
             String inputLine;
-            while ((inputLine = in.readLine()) != null) {
+            while ((inputLine = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                 sb.append(inputLine);
             }
             LOG.info("Response payload: {}", sb);

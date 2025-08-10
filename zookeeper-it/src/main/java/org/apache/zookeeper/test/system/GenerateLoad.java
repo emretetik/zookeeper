@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.test.system;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -121,7 +122,7 @@ public class GenerateLoad {
                 BufferedReader is = new BufferedReader(new InputStreamReader(s
                         .getInputStream()));
                 String result;
-                while ((result = is.readLine()) != null) {
+                while ((result = BoundedLineReader.readLine(is, 5_000_000)) != null) {
                     String timePercentCount[] = result.split(" ");
                     if (timePercentCount.length != 5) {
                         LOG.error("Got " + result + " from " + s
@@ -481,7 +482,7 @@ public class GenerateLoad {
                         BufferedReader is = new BufferedReader(new InputStreamReader(s
                                 .getInputStream()));
                         String line;
-                        while ((line = is.readLine()) != null) {
+                        while ((line = BoundedLineReader.readLine(is, 5_000_000)) != null) {
                             percentage = Integer.parseInt(line);
                         }
                     } catch (Exception e) {
@@ -651,7 +652,7 @@ public class GenerateLoad {
                 BufferedReader is = new BufferedReader(new InputStreamReader(
                         System.in));
                 String line;
-                while ((line = is.readLine()) != null) {
+                while ((line = BoundedLineReader.readLine(is, 5_000_000)) != null) {
                     try {
                         String cmdNumber[] = line.split(" ");
                         if (cmdNumber[0].equals("percentage")
@@ -699,7 +700,7 @@ public class GenerateLoad {
         BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
         String line;
         try {
-          while((line = br.readLine()) != null) {
+          while((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
             if (line.startsWith("Mode: ")) {
               return line.substring(6);
             }
